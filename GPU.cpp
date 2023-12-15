@@ -1,6 +1,17 @@
 ﻿#include <iostream>
 #include "GPU.h"
 
+void GPU::operator=(GPU other) {
+	this->name_gpu = other.GetModName();
+	this->vram = other.GetVram();
+	this->TDP = other.GetTDP();
+}
+
+std::ostream& operator << (std::ostream& out, GPU& gpu) {
+	out << gpu.GetModName();
+	return out;
+}
+
 inline void clean()  //Очистка потока
 {
 	while (getchar() != '\n');
@@ -49,7 +60,11 @@ bool GPU::CheckCor(string name_gpu, int vram, int TDP)
 	}
 }
 
-string GPU::GetName()
+string GPU::GetCompName() const {
+	return "GPU";
+}
+
+string GPU::GetModName() const
 {
 	return name_gpu;
 }
@@ -81,7 +96,7 @@ void GPU::SetGpu(string name_gpu, int vram, int TDP)
 	}
 }
 
-void GPU::input_gpu()
+void GPU::input()
 {
 	printf("\nВвод параметров видеокарты\n");
 	string name_gpu;

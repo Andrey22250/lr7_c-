@@ -3,18 +3,18 @@
 #include "CPU.h"
 
 void CPU::operator=(const CPU other) {
-	this->name_cpu = other.GetName();
+	this->name_cpu = other.GetModName();
 	this->frequency = other.GetFrequency();
 	this->cores = other.GetCores();
 	this->treads = other.GetTreads();
 }
 
 CPU operator+(const CPU& cpu, int addable) {
-	return CPU(cpu.GetName(), cpu.GetFrequency() + addable, cpu.GetCores() , cpu.GetTreads());
+	return CPU(cpu.GetModName(), cpu.GetFrequency() + addable, cpu.GetCores() , cpu.GetTreads());
 }
 
 CPU& operator++(CPU& cpu) {
-	cpu.SetCpu(cpu.GetName(), cpu.GetFrequency(), cpu.GetCores(), cpu.GetTreads());
+	cpu.SetCpu(cpu.GetModName(), cpu.GetFrequency(), cpu.GetCores(), cpu.GetTreads());
 	return cpu;
 }
 
@@ -25,8 +25,12 @@ CPU operator++(CPU& cpu, int) {
 }
 
 std::ostream& operator << (ostream& out, const CPU& cpu) {
-	out << cpu.GetName();
+	out << cpu.GetModName();
 	return out;
+}
+
+string CPU::GetCompName() const {
+	return "CPU";
 }
 
 inline void clean()  //Очистка потока
@@ -95,12 +99,12 @@ int CPU::GetTreads() const
 	return treads;
 }
 
-string CPU::GetName() const
+string CPU::GetModName() const
 {
 	return name_cpu;
 }
 //Ввод
-void CPU::input_cpu()
+void CPU::input()
 {
 	int frequency, cores, treads;
 	string name_cpu;

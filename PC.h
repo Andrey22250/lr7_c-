@@ -5,6 +5,7 @@
 #include "GPU.h"
 #include "Ram.h"
 #include "Mrbrd.h"
+#include "BuildTab.h"
 
 using namespace std;
 

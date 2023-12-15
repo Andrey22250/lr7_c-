@@ -8,39 +8,36 @@ int main()
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 
-	LaptopComponentsTable table = LaptopComponentsTable();
-	table.addComponent(new Motherboard("MSI AB350"));
-	table.addComponent(new CPU("AMD Ryzen 5 2600"));
-	table.addComponent(new RAM("HyperX Fury 8GB"));
-	table.addComponent(new HDD("Toshiba 7200M"));
-	table.addComponent(new CPU("Intel i5 11400f"));
-	table.addComponent(new SSD("Samsung 970 EVO Plus"));
+	BuildCompTab table = BuildCompTab();
+	table.addComp(new GPU("RTX 2070"));
+	table.addComp(new CPU("Intel i5 11400f"));
+	table.addComp(new CPU("Intel i7 11700f"));
 	table.print();
-	std::cout << std::endl;
+	cout << endl;
 
-	table.sortByComponentName();
+	table.sortByCompName();
 	table.print();
-	std::cout << std::endl;
+	cout << endl;
 
-	table.removeComponent("AMD Ryzen 5 2600");
-	table.sortByModelName();
+	table.removeComp("Intel i5 11400f");
+	table.sortByModName();
 	table.print();
-	std::cout << std::endl;
+	cout << endl;
 
-	table.removeLastComponent();
+	table.removeLastComp();
 	table.print();
 
-	LaptopComponent* searchbleComponent;
+	BuildTab* searchbleComponent;
 	try
 	{
-		searchbleComponent = table.getComponent("Intel i7 11700f");
+		searchbleComponent = table.getComp("Intel i7 11700f");
 	}
-	catch (const std::exception&)
+	catch (const exception&)
 	{
-		std::cout << "Комплектующее не найдено!" << std::endl;
+		cout << "Комплектующее не найдено!" << endl;
 	}
-	searchbleComponent = table.getComponent("Intel i5 11400f");
-	std::cout << "Найденный компонент: " << searchbleComponent->toString() << std::endl;
+	searchbleComponent = table.getComp("Intel i7 11700f");
+	cout << "Найденный компонент: " << searchbleComponent->GetModName() << endl;
 
 	return 0;
 }

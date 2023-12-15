@@ -69,8 +69,8 @@ void PC::input_pc()
 		scanf("%f", &price);
 		clean();
 	} while (price <= 0);
-	cpu.input_cpu();
-	gpu.input_gpu();
+	cpu.input();
+	gpu.input();
 	ram.input_ram();
 	mrbrd->input_mrbrd();
 	SetPrice(price);
@@ -80,9 +80,9 @@ void PC::Undervolt_GPU()
 {
 	if (this->gpu.GetTDP() - 3 > this->gpu.GetMin_TDP())
 	{
-		gpu = GPU(this->gpu.GetName(), this->gpu.GetVram(), this->gpu.GetTDP() - 3);
+		gpu = GPU(this->gpu.GetModName(), this->gpu.GetVram(), this->gpu.GetTDP() - 3);
 		if (this->gpu.GetTDP() <= this->gpu.GetMin_TDP())
-			gpu = GPU(this->gpu.GetName(), this->gpu.GetVram(), this->gpu.GetMin_TDP());
+			gpu = GPU(this->gpu.GetModName(), this->gpu.GetVram(), this->gpu.GetMin_TDP());
 	}
 	else printf("Undervolt невозможен!");
 }
@@ -90,8 +90,8 @@ void PC::Undervolt_GPU()
 void PC::Out_PC()
 {
 	printf("\nИнформация о сборке:\n\n");
-	printf("Процессор: %s, %d МГЦ, %d ядер, %d потоков\n", this->cpu.GetName().c_str(), this->cpu.GetFrequency(), this->cpu.GetCores(), this->cpu.GetTreads());
-	printf("Видеокарта: %s, %d VRAM, %d TDP\n", this->gpu.GetName().c_str(), this->gpu.GetVram(), this->gpu.GetTDP());
+	printf("Процессор: %s, %d МГЦ, %d ядер, %d потоков\n", this->cpu.GetModName().c_str(), this->cpu.GetFrequency(), this->cpu.GetCores(), this->cpu.GetTreads());
+	printf("Видеокарта: %s, %d VRAM, %d TDP\n", this->gpu.GetModName().c_str(), this->gpu.GetVram(), this->gpu.GetTDP());
 	printf("ОЗУ: %s, %d частота, %d объём\n", this->ram.GetType().c_str(), this->ram.GetFrequencyRam(), this->ram.GetMem());
 	printf("Материнская плата: %s, %s чипсет\n", this->mrbrd->GetName().c_str(), this->mrbrd->GetChipset().c_str());
 	printf("Цена сборки: %.2f\n\n", this->price);
