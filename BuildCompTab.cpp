@@ -39,7 +39,7 @@ void BuildCompTab::removeLastComp()
 
 BuildTab* BuildCompTab::getComp(string modName)
 {
-	//используем тот же итератор из removeComponent()
+	//используем тот же итератор из removeComp()
 	auto removable = find_if(this->components.begin(), this->components.end(), [&](BuildTab* component) {
 		return component->GetModName() == modName;
 		});
